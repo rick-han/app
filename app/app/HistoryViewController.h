@@ -1,13 +1,13 @@
 //
-//  AppController.m
+//  HistoryViewController.h
 //  app
 //
 //  Created by Rickard Hansson on 2012-06-17.
 //  Copyright (c) 2012 cybercom. All rights reserved.
 //
 
-#import "AppController.h"
+#import <UIKit/UIKit.h>
 
-@implementation AppController
+@interface HistoryViewController : UITableViewController
 
 @end

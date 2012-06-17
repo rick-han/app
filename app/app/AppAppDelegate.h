@@ -7,14 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppModel.h"
+#import "HistoryViewController.h"
 
 @class MainViewController;
 
-@interface AppAppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+@property (strong, nonatomic) AppModel *mModel;
+@property (strong, nonatomic) UITabBarController *mTabBarController;
 @property (strong, nonatomic) MainViewController *viewController;
+@property (strong, nonatomic) HistoryViewController *historyViewController;
 
 @end
 

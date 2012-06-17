@@ -11,17 +11,30 @@
 
 @implementation AppAppDelegate
 
+@synthesize mModel;
 @synthesize window;
 @synthesize viewController;
+@synthesize mTabBarController;
+@synthesize historyViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.mModel = [[AppModel alloc] init];
+    self.mTabBarController = [[UITabBarController alloc] init];
+    
+    UINavigationController *mainNavController, *historyNavController;
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         self.viewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+        self.historyViewController = [[HistoryViewController alloc] initWithNibName:@"HistoryViewController" bundle:nil];
     } 
-    self.window.rootViewController = self.viewController;
+    mainNavController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    historyNavController = [[UINavigationController alloc] initWithRootViewController:historyViewController];
+    self.mTabBarController.viewControllers = [NSArray arrayWithObjects:mainNavController, historyNavController, nil];    
+    self.mTabBarController.delegate=self;
+    self.window.rootViewController = self.mTabBarController;
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -21,7 +21,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
+  
+    self.navigationItem.title = @"Karta";
+    self.tabBarItem.title = @"Main";
     [PSLocationManager sharedLocationManager].delegate = self;
     [[PSLocationManager sharedLocationManager] prepLocationUpdates];
     [[PSLocationManager sharedLocationManager] startLocationUpdates];
