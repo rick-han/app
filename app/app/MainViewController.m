@@ -33,6 +33,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     mMapView.showsUserLocation = TRUE;
+    mMapView.userTrackingMode = TRUE;
     self.navigationItem.title = @"Karta";
   
     [PSLocationManager sharedLocationManager].delegate = self;
