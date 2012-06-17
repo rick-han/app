@@ -22,6 +22,7 @@ static const NSUInteger kGPSRefinementInterval = 15; // the number of seconds at
 static const CGFloat kSpeedNotSet = -1.0;
 
 #import "PSLocationManager.h"
+#import "AppAppDelegate.h"
 
 @interface PSLocationManager ()
 
@@ -69,7 +70,7 @@ static const CGFloat kSpeedNotSet = -1.0;
 @synthesize readyToExposeDistanceAndSpeed = _readyToExposeDistanceAndSpeed;
 @synthesize allowMaximumAcceptableAccuracy = _allowMaximumAcceptableAccuracy;
 @synthesize checkingSignalStrength = _checkingSignalStrength;
-
+AppAppDelegate *app;
 + (id)sharedLocationManager {
     static dispatch_once_t pred;
     static PSLocationManager *locationManagerSingleton = nil;
@@ -89,7 +90,7 @@ static const CGFloat kSpeedNotSet = -1.0;
             self.locationManager.distanceFilter = kDistanceFilter;
             self.locationManager.headingFilter = kHeadingFilter;
         }
-        
+        app = (AppAppDelegate*) [[UIApplication sharedApplication] delegate];
         self.locationHistory = [NSMutableArray arrayWithCapacity:kNumLocationHistoriesToKeep];
         self.speedHistory = [NSMutableArray arrayWithCapacity:kNumSpeedHistoriesToAverage];
         [self resetLocationUpdates];
@@ -321,6 +322,21 @@ static const CGFloat kSpeedNotSet = -1.0;
             }
         }
     }
+    
+    if(app.mModel.startCoordinate == nil){
+        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+        [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        if ([placemarks count] > 0) {
+            // Pick the best out of the possible placemarks
+            CLPlacemark *placemark = [placemarks objectAtIndex:0];
+            NSString *addressString = [placemark name];
+            app.mModel.startCoordinate = newLocation;
+            NSLog(@"loc: %@",addressString);
+        }
+        
+    }];
+    }
+
     
     // this will be invalidated above if a new location is received before it fires
     self.locationPingTimer = [NSTimer timerWithTimeInterval:kMinimumLocationUpdateInterval target:self selector:@selector(requestNewLocation) userInfo:nil repeats:NO];

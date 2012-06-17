@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
 @interface AppModel : NSObject
+
+@property (nonatomic, retain) NSMutableArray *mHistoryArray;
+
+@property CLLocation *startCoordinate;
+@property CLLocation *stopCoordinate;
 
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "MainViewController.h"
+#import "AppAppDelegate.h"
+#import "HistoryObject.h"
 
 @interface MainViewController ()
 
@@ -18,12 +20,13 @@
 @synthesize distanceLabel = _distanceLabel;
 @synthesize mMapView;
 
-
+AppAppDelegate *app;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {        
         self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemHistory tag:0];
         self.tabBarItem.title = @"Karta";
+        app = (AppAppDelegate*) [[UIApplication sharedApplication] delegate];
     }
     return self;
 }
@@ -35,6 +38,8 @@
     mMapView.showsUserLocation = TRUE;
     mMapView.userTrackingMode = TRUE;
     mMapView.userInteractionEnabled = FALSE;
+    
+       
     self.navigationItem.title = @"Karta";
   
     [PSLocationManager sharedLocationManager].delegate = self;
@@ -48,7 +53,19 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
-
+-(void) add{
+   AppAppDelegate *app = (AppAppDelegate*) [[UIApplication sharedApplication] delegate];
+    HistoryObject *obj = [[HistoryObject alloc] init];
+    
+    obj.distance = @"234";
+    obj.fromString= @"spånga";
+    obj.toString = @"sdada";
+    [app.mModel.mHistoryArray addObject:obj]; 
+    
+    for(int k=0;k<[app.mModel.mHistoryArray count];k++){
+        HistoryObject *s = [app.mModel.mHistoryArray objectAtIndex:k];
+           }
+}
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {

@@ -10,4 +10,20 @@
 
 @implementation AppModel
 
+@synthesize mHistoryArray;
+@synthesize startCoordinate;
+@synthesize stopCoordinate;
+
+- (id) init {
+    
+    self = [super init];
+    
+    if(self) {
+        mHistoryArray = [[NSMutableArray alloc] init];
+    }
+ 
+    return self;
+}
+
+
 @end
