@@ -13,6 +13,12 @@
 		A573E8FB158CE3BD0091D4C3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A573E8F9158CE3BD0091D4C3 /* InfoPlist.strings */; };
 		A573E8FD158CE3BD0091D4C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A573E8FC158CE3BD0091D4C3 /* main.m */; };
 		A573E901158CE3BD0091D4C3 /* AppAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A573E900158CE3BD0091D4C3 /* AppAppDelegate.m */; };
+		A5E6C001158DDCD5005617B0 /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E6C000158DDCD5005617B0 /* AppModel.m */; };
+		A5E6C004158DDCE1005617B0 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E6C003158DDCE1005617B0 /* AppController.m */; };
+		A5E6C00C158DDD9F005617B0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E6C00A158DDD9F005617B0 /* MainViewController.m */; };
+		A5E6C00D158DDD9F005617B0 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5E6C00B158DDD9F005617B0 /* MainViewController.xib */; };
+		A5E6C011158DDE1D005617B0 /* PSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E6C010158DDE1D005617B0 /* PSLocationManager.m */; };
+		A5E6C013158DDE3D005617B0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E6C012158DDE3D005617B0 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +32,17 @@
 		A573E8FE158CE3BD0091D4C3 /* app-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "app-Prefix.pch"; sourceTree = "<group>"; };
 		A573E8FF158CE3BD0091D4C3 /* AppAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppAppDelegate.h; sourceTree = "<group>"; };
 		A573E900158CE3BD0091D4C3 /* AppAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppAppDelegate.m; sourceTree = "<group>"; };
+		A5E6BFFF158DDCD5005617B0 /* AppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
+		A5E6C000158DDCD5005617B0 /* AppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppModel.m; sourceTree = "<group>"; };
+		A5E6C002158DDCE1005617B0 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
+		A5E6C003158DDCE1005617B0 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
+		A5E6C005158DDD01005617B0 /* ModelChangedListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelChangedListener.h; sourceTree = "<group>"; };
+		A5E6C009158DDD9F005617B0 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		A5E6C00A158DDD9F005617B0 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		A5E6C00B158DDD9F005617B0 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		A5E6C00F158DDE1D005617B0 /* PSLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSLocationManager.h; sourceTree = "<group>"; };
+		A5E6C010158DDE1D005617B0 /* PSLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSLocationManager.m; sourceTree = "<group>"; };
+		A5E6C012158DDE3D005617B0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5E6C013158DDE3D005617B0 /* CoreLocation.framework in Frameworks */,
 				A573E8F1158CE3BD0091D4C3 /* UIKit.framework in Frameworks */,
 				A573E8F3158CE3BD0091D4C3 /* Foundation.framework in Frameworks */,
 				A573E8F5158CE3BD0091D4C3 /* CoreGraphics.framework in Frameworks */,
@@ -62,6 +80,7 @@
 		A573E8EF158CE3BD0091D4C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5E6C012158DDE3D005617B0 /* CoreLocation.framework */,
 				A573E8F0158CE3BD0091D4C3 /* UIKit.framework */,
 				A573E8F2158CE3BD0091D4C3 /* Foundation.framework */,
 				A573E8F4158CE3BD0091D4C3 /* CoreGraphics.framework */,
@@ -72,8 +91,9 @@
 		A573E8F6158CE3BD0091D4C3 /* app */ = {
 			isa = PBXGroup;
 			children = (
-				A573E8FF158CE3BD0091D4C3 /* AppAppDelegate.h */,
-				A573E900158CE3BD0091D4C3 /* AppAppDelegate.m */,
+				A5E6C00E158DDDAA005617B0 /* UI */,
+				A5E6C008158DDD85005617B0 /* ViewControllers */,
+				A5E6BFFD158DDC90005617B0 /* Application */,
 				A573E8F7158CE3BD0091D4C3 /* Supporting Files */,
 			);
 			path = app;
@@ -88,6 +108,39 @@
 				A573E8FE158CE3BD0091D4C3 /* app-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A5E6BFFD158DDC90005617B0 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				A573E8FF158CE3BD0091D4C3 /* AppAppDelegate.h */,
+				A573E900158CE3BD0091D4C3 /* AppAppDelegate.m */,
+				A5E6BFFF158DDCD5005617B0 /* AppModel.h */,
+				A5E6C000158DDCD5005617B0 /* AppModel.m */,
+				A5E6C002158DDCE1005617B0 /* AppController.h */,
+				A5E6C003158DDCE1005617B0 /* AppController.m */,
+				A5E6C005158DDD01005617B0 /* ModelChangedListener.h */,
+				A5E6C00F158DDE1D005617B0 /* PSLocationManager.h */,
+				A5E6C010158DDE1D005617B0 /* PSLocationManager.m */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		A5E6C008158DDD85005617B0 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A5E6C009158DDD9F005617B0 /* MainViewController.h */,
+				A5E6C00A158DDD9F005617B0 /* MainViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A5E6C00E158DDDAA005617B0 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				A5E6C00B158DDD9F005617B0 /* MainViewController.xib */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A573E8FB158CE3BD0091D4C3 /* InfoPlist.strings in Resources */,
+				A5E6C00D158DDD9F005617B0 /* MainViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +209,10 @@
 			files = (
 				A573E8FD158CE3BD0091D4C3 /* main.m in Sources */,
 				A573E901158CE3BD0091D4C3 /* AppAppDelegate.m in Sources */,
+				A5E6C001158DDCD5005617B0 /* AppModel.m in Sources */,
+				A5E6C004158DDCE1005617B0 /* AppController.m in Sources */,
+				A5E6C00C158DDD9F005617B0 /* MainViewController.m in Sources */,
+				A5E6C011158DDE1D005617B0 /* PSLocationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +318,7 @@
 				A573E906158CE3BD0091D4C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -10,7 +10,6 @@
 
 @interface AppAppDelegate : UIResponder <UIApplicationDelegate>
 
-// nånting
 
 @property (strong, nonatomic) UIWindow *window;
 
