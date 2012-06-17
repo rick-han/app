@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AppModel.h"
 #import "HistoryViewController.h"
+#import "InitViewController.h"
 
 @class MainViewController;
 
@@ -19,6 +20,11 @@
 @property (strong, nonatomic) UITabBarController *mTabBarController;
 @property (strong, nonatomic) MainViewController *viewController;
 @property (strong, nonatomic) HistoryViewController *historyViewController;
+@property (strong, nonatomic) InitViewController *initViewController;
+@property (strong, nonatomic) UINavigationController *mainNavController;
+@property (strong, nonatomic) UINavigationController *historyNavController;
+@property (strong, nonatomic) UINavigationController *initNavController;
+
 
 @end
 

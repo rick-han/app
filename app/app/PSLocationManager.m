@@ -107,6 +107,7 @@ static const CGFloat kSpeedNotSet = -1.0;
     self.lastRecordedLocation = nil;
     self.locationHistory = nil;
     self.speedHistory = nil;
+    
 }
 
 - (void)setSignalStrength:(PSLocationManagerGPSSignalStrength)signalStrength {

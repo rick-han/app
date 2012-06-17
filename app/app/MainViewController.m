@@ -34,6 +34,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     mMapView.showsUserLocation = TRUE;
     mMapView.userTrackingMode = TRUE;
+    mMapView.userInteractionEnabled = FALSE;
     self.navigationItem.title = @"Karta";
   
     [PSLocationManager sharedLocationManager].delegate = self;
@@ -86,7 +87,7 @@
 }
 
 - (void)dealloc {
-    [mMapView release];
-    [super dealloc];
+    
+   
 }
 @end
