@@ -16,6 +16,7 @@
 
 @synthesize strengthLabel = _strengthLabel;
 @synthesize distanceLabel = _distanceLabel;
+@synthesize mMapView;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
@@ -31,7 +32,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-  
+    mMapView.showsUserLocation = TRUE;
     self.navigationItem.title = @"Karta";
   
     [PSLocationManager sharedLocationManager].delegate = self;
@@ -41,6 +42,7 @@
 
 - (void)viewDidUnload
 {
+    [self setMMapView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -82,4 +84,8 @@
     self.strengthLabel.text = NSLocalizedString(@"Unable to determine location", @"");
 }
 
+- (void)dealloc {
+    [mMapView release];
+    [super dealloc];
+}
 @end

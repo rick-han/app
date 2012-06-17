@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "PSLocationManager.h"
+#import <MapKit/MapKit.h>
 
-@interface MainViewController : UIViewController <PSLocationManagerDelegate>
+@interface MainViewController : UIViewController <PSLocationManagerDelegate, MKMapViewDelegate>
 
 @property (nonatomic, retain) IBOutlet UILabel *strengthLabel;
 @property (nonatomic, retain) IBOutlet UILabel *distanceLabel;
+@property (retain, nonatomic) IBOutlet MKMapView *mMapView;
 
 @end
