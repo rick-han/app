@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PSLocationManager.h"
 
-@interface MainViewController : UIViewController
+@interface MainViewController : UIViewController <PSLocationManagerDelegate>
+
+@property (nonatomic, retain) IBOutlet UILabel *strengthLabel;
+@property (nonatomic, retain) IBOutlet UILabel *distanceLabel;
 
 @end

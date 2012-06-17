@@ -7,22 +7,21 @@
 //
 
 #import "AppAppDelegate.h"
+#import "MainViewController.h"
 
 @implementation AppAppDelegate
 
-@synthesize window = _window;
-
-- (void)dealloc
-{
-    [_window release];
-    [super dealloc];
-}
+@synthesize window;
+@synthesize viewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        self.viewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+    } 
+    self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -55,3 +54,4 @@
 }
 
 @end
+
