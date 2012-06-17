@@ -14,11 +14,20 @@
 
 @implementation HistoryViewController
 
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+           }
+    return self;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemHistory tag:0];
+        self.tabBarItem.title = @"Historik";
     }
     return self;
 }
@@ -29,8 +38,7 @@
     
     
     self.navigationItem.title = @"Historik";
-    self.tabBarItem.title = @"Historik";
-
+   
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

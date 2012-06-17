@@ -34,6 +34,7 @@
     historyNavController = [[UINavigationController alloc] initWithRootViewController:historyViewController];
     self.mTabBarController.viewControllers = [NSArray arrayWithObjects:mainNavController, historyNavController, nil];    
     self.mTabBarController.delegate=self;
+    
     self.window.rootViewController = self.mTabBarController;
     [self.window makeKeyAndVisible];
     return YES;

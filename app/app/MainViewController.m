@@ -17,13 +17,23 @@
 @synthesize strengthLabel = _strengthLabel;
 @synthesize distanceLabel = _distanceLabel;
 
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {        
+        self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemHistory tag:0];
+        self.tabBarItem.title = @"Karta";
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
   
     self.navigationItem.title = @"Karta";
-    self.tabBarItem.title = @"Main";
+  
     [PSLocationManager sharedLocationManager].delegate = self;
     [[PSLocationManager sharedLocationManager] prepLocationUpdates];
     [[PSLocationManager sharedLocationManager] startLocationUpdates];
