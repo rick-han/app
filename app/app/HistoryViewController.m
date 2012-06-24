@@ -2,8 +2,8 @@
 //  HistoryViewController.m
 //  app
 //
-//  Created by Rickard Hansson on 2012-06-17.
-//  Copyright (c) 2012 cybercom. All rights reserved.
+//  Created by kj on 2012-06-17.
+//  Copyright (c) 2012. All rights reserved.
 //
 
 #import "HistoryViewController.h"
@@ -27,7 +27,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemHistory tag:0];
-        self.tabBarItem.title = @"Historik";
+        //self.tabBarItem.title = @"Historik";
     }
     return self;
 }

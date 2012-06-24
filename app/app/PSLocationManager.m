@@ -2,8 +2,8 @@
 //  PSLocationManager.m
 //  app
 //
-//  Created by Rickard Hansson on 2012-06-17.
-//  Copyright (c) 2012 cybercom. All rights reserved.
+//  Created by kj on 2012-06-17.
+//  Copyright (c) 2012. All rights reserved.
 //
 
 static const NSUInteger kDistanceFilter = 5; // the minimum distance (meters) for which we want to receive location updates (see docs for CLLocationManager.distanceFilter)
