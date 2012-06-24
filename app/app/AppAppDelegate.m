@@ -18,7 +18,7 @@
 @synthesize historyViewController;
 @synthesize mainNavController;
 @synthesize historyNavController;
-@synthesize initNavController;
+@synthesize initsNavController;
 @synthesize initViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -35,10 +35,10 @@
         self.historyViewController = [[HistoryViewController alloc] initWithNibName:@"HistoryViewController" bundle:nil];
         self.initViewController = [[InitViewController alloc] initWithNibName:@"InitViewController" bundle:nil];
     } 
-    initNavController = [[UINavigationController alloc] initWithRootViewController:initViewController];
+    initsNavController = [[UINavigationController alloc] initWithRootViewController:initViewController];
     mainNavController = [[UINavigationController alloc] initWithRootViewController:viewController];
     historyNavController = [[UINavigationController alloc] initWithRootViewController:historyViewController];
-    self.mTabBarController.viewControllers = [NSArray arrayWithObjects:initNavController, historyNavController, nil];    
+    self.mTabBarController.viewControllers = [NSArray arrayWithObjects:initsNavController, historyNavController, nil];    
     self.mTabBarController.delegate=self;
     
     self.window.rootViewController = self.mTabBarController;

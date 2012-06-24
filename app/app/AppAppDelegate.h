@@ -23,7 +23,7 @@
 @property (strong, nonatomic) InitViewController *initViewController;
 @property (strong, nonatomic) UINavigationController *mainNavController;
 @property (strong, nonatomic) UINavigationController *historyNavController;
-@property (strong, nonatomic) UINavigationController *initNavController;
+@property (strong, nonatomic) UINavigationController *initsNavController;
 
 
 @end

@@ -15,5 +15,7 @@
 
 @property CLLocation *startCoordinate;
 @property CLLocation *stopCoordinate;
+@property (strong ,nonatomic) NSString *fromString;
+@property (strong, nonatomic) NSString *toString;
 
 @end

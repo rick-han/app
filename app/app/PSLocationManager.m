@@ -323,6 +323,8 @@ AppAppDelegate *app;
         }
     }
     
+    app.mModel.stopCoordinate = newLocation;
+    
     if(app.mModel.startCoordinate == nil){
         CLGeocoder *geocoder = [[CLGeocoder alloc] init];
         [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error) {
@@ -331,7 +333,7 @@ AppAppDelegate *app;
             CLPlacemark *placemark = [placemarks objectAtIndex:0];
             NSString *addressString = [placemark name];
             app.mModel.startCoordinate = newLocation;
-            NSLog(@"loc: %@",addressString);
+            app.mModel.fromString = addressString;
         }
         
     }];

@@ -13,5 +13,6 @@
 @synthesize fromString;
 @synthesize toString;
 @synthesize distance;
+@synthesize type;
 
 @end

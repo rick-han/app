@@ -31,6 +31,10 @@ AppAppDelegate *app;
         //self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Karta" image:nil tag:0];
         
         app = (AppAppDelegate*) [[UIApplication sharedApplication] delegate];
+        
+        
+        UIBarButtonItem *btnBack = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add)];
+        self.navigationItem.RightBarButtonItem = btnBack;
     }
     return self;
 }
@@ -52,12 +56,27 @@ AppAppDelegate *app;
     [PSLocationManager sharedLocationManager].delegate = self;
     [[PSLocationManager sharedLocationManager] prepLocationUpdates];
     [[PSLocationManager sharedLocationManager] startLocationUpdates];
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [[PSLocationManager sharedLocationManager] prepLocationUpdates];
+    [[PSLocationManager sharedLocationManager] startLocationUpdates];
+    self.distanceLabel.text = @"";
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [[PSLocationManager sharedLocationManager] stopLocationUpdates];
+    self.distanceLabel.text = @"";
+
 }
 
 - (void)viewDidUnload
 {
     [self setMMapView:nil];
     [super viewDidUnload];
+    
+   
     // Release any retained subviews of the main view.
 }
 
@@ -71,18 +90,31 @@ AppAppDelegate *app;
 }
 
 -(void) add{
-   AppAppDelegate *app = (AppAppDelegate*) [[UIApplication sharedApplication] delegate];
+    AppAppDelegate *app = (AppAppDelegate*) [[UIApplication sharedApplication] delegate];
     HistoryObject *obj = [[HistoryObject alloc] init];
     
-    obj.distance = @"234";
-    obj.fromString= @"spånga";
-    obj.toString = @"sdada";
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:app.mModel.stopCoordinate completionHandler:^(NSArray *placemarks, NSError *error) {
+        if ([placemarks count] > 0) {
+            // Pick the best out of the possible placemarks
+            CLPlacemark *placemark = [placemarks objectAtIndex:0];
+            NSString *addressString = [placemark name];
+            app.mModel.toString = addressString;
+        }
+    }];
+    
+    obj.distance = self.distanceLabel.text;
+    obj.fromString= app.mModel.fromString;
+    obj.toString = app.mModel.toString;
+    
     [app.mModel.mHistoryArray addObject:obj]; 
     
-    for(int k=0;k<[app.mModel.mHistoryArray count];k++){
-        HistoryObject *s = [app.mModel.mHistoryArray objectAtIndex:k];
-           }
-}
+    UIAlertView *alrt = [[UIAlertView alloc] initWithTitle:@"Avbryt?" message:@"Vill du stoppa?" delegate:self cancelButtonTitle:@"Avbryt" otherButtonTitles:@"OK", nil];
+    [alrt show];
+    
+     app.mTabBarController.viewControllers = [NSArray arrayWithObjects:app.initsNavController, app.historyNavController, nil]; 
+    
+   }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
@@ -112,7 +144,7 @@ AppAppDelegate *app;
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager distanceUpdated:(CLLocationDistance)distance {
-    self.distanceLabel.text = [NSString stringWithFormat:@"%.2f %@", distance, NSLocalizedString(@"meters", @"")];
+    self.distanceLabel.text = [NSString stringWithFormat:@"%.2f %@", distance/1000, NSLocalizedString(@"KM", @"")];
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {
