@@ -13,6 +13,8 @@
 @synthesize mHistoryArray;
 @synthesize startCoordinate;
 @synthesize stopCoordinate;
+@synthesize fromString;
+@synthesize toString;
 
 - (id) init {
     

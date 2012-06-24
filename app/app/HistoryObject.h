@@ -13,5 +13,7 @@
 @property (nonatomic, retain) NSString *fromString;
 @property (nonatomic, retain) NSString *toString;
 @property (nonatomic, retain) NSString *distance;
+@property (nonatomic, retain) NSString *type;
+
 
 @end

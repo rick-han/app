@@ -7,6 +7,9 @@
 //
 
 #import "HistoryViewController.h"
+#import "AppAppDelegate.h"
+#import "AppModel.h"
+#import "HistoryObject.h"
 
 @interface HistoryViewController ()
 
@@ -14,12 +17,16 @@
 
 @implementation HistoryViewController
 
+AppAppDelegate *app;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-           }
+        
+           app = (AppAppDelegate*) [[UIApplication sharedApplication] delegate];
+           
+    }
     return self;
 }
 
@@ -61,30 +68,34 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+
     // Return the number of rows in the section.
-    return 0;
+    return [app.mModel.mHistoryArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+	}
+
     
-    // Configure the cell...
+    HistoryObject *obj = [app.mModel.mHistoryArray objectAtIndex:indexPath.row];    
     
+    cell.textLabel.text = obj.fromString;
+    cell.detailTextLabel.text = obj.distance;
     return cell;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    self.tableView.reloadData;
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -128,14 +139,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    HistoryObject *obj = [app.mModel.mHistoryArray objectAtIndex:indexPath.row];
+    obj.type = @"företag";
+    
+
 }
 
 @end
