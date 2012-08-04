@@ -8,6 +8,7 @@
 
 #import "AppAppDelegate.h"
 #import "MainViewController.h"
+#import "HistoryObject.h"
 
 @implementation AppAppDelegate
 
@@ -54,9 +55,15 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    //store the array
+    NSString *localPath = @"Documents/app.archive";
+    NSString *fullPath = [NSHomeDirectory() stringByAppendingPathComponent:localPath];
+    NSArray *array = [[NSArray alloc] initWithArray:mModel.mHistoryArray];
+    [NSKeyedArchiver archiveRootObject:array toFile:fullPath];
+     NSLog(@"%@",array);
+   
 }
+
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
@@ -65,11 +72,65 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    //load the array
+    NSString *localPath = @"Documents/app.archive";
+    NSString *fullPath = [NSHomeDirectory() stringByAppendingPathComponent:localPath];
+
+    NSArray* myArray = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
+    if(myArray != nil)
+        mModel.mHistoryArray = [myArray mutableCopy];
+    NSLog(@"%@",myArray);
+
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
+- (NSString *)documentsDirectory
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    return  documentsDirectory;
+}
+
+- (NSString *)dataFilePath
+{
+    return [[self documentsDirectory] stringByAppendingPathComponent:@"app.plist"];
+}
+
+- (void)saveHistoryItems
+{
+    NSMutableData *data = [[NSMutableData alloc] init];
+    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    [archiver encodeObject: mModel.mHistoryArray  forKey:@"Historik"];
+    [archiver finishEncoding];
+    [data writeToFile:[self dataFilePath] atomically:YES];
+    
+    NSMutableDictionary *savedStock = [[NSMutableDictionary alloc] initWithContentsOfFile: [self dataFilePath]];
+
+   }
+
+
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+     /* for(int k=0; k<[mModel.mHistoryArray count];k++){
+            
+        HistoryObject *obj = [mModel.mHistoryArray objectAtIndex:k];
+        NSString *str = obj.finalString;
+        str = [str stringByAppendingString:[@"%" stringByAppendingString:obj.distance]];     
+        
+        [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"history"];
+
+    }*/
+       
+    
+/*
+    jsonstr = [[NSUserDefaults standardUserDefaults] objectForKey:@"forcast_data"];
+    if(jsonstr != nil) {
+        NSData* data=[jsonstr dataUsingEncoding:NSUTF8StringEncoding];
+        arr = [[MSBParser parseForecast:data] retain];   
+    }
+*/
+
+    
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 

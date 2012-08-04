@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HistoryObject : NSObject
+@interface HistoryObject : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSString *fromString;
 @property (nonatomic, strong) NSString *toString;
 @property (nonatomic, strong) NSString *distance;
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSString *finalString;
-
+@property (nonatomic, strong) NSString *comment;
 
 @end

@@ -36,6 +36,7 @@ AppAppDelegate *app;
         
         //Ändra barbutton till en egen knapp.
         btnBack = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(add)];
+        [btnBack setEnabled:false];
         self.navigationItem.RightBarButtonItem = btnBack;
        
            }
@@ -116,29 +117,32 @@ AppAppDelegate *app;
         }
     }];
     
-
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Vill du stoppa?" delegate:self cancelButtonTitle:@"Avbryt" otherButtonTitles:@"OK", nil];
-    [alert show];
+   
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Vill du stoppa?" delegate:self cancelButtonTitle:@"Avbryt" otherButtonTitles:@"OK", nil];
+        [alert show];
+    
    }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex == 1)
     {
-        app.mTabBarController.viewControllers = [NSArray arrayWithObjects:app.initsNavController, app.historyNavController, nil]; 
-        AppAppDelegate *app = (AppAppDelegate*) [[UIApplication sharedApplication] delegate];
-        HistoryObject *obj = [[HistoryObject alloc] init];
         
-        obj.distance = self.distanceLabel.text;
-        obj.fromString= app.mModel.fromString;
-        obj.toString = app.mModel.toString;
+            app.mTabBarController.viewControllers = [NSArray arrayWithObjects:app.initsNavController, app.historyNavController, nil]; 
+            AppAppDelegate *app = (AppAppDelegate*) [[UIApplication sharedApplication] delegate];
+            HistoryObject *obj = [[HistoryObject alloc] init];
         
-        obj.finalString = [obj.fromString stringByAppendingString:[@" till " stringByAppendingString:obj.toString]];
+            obj.distance = self.distanceLabel.text;
+            obj.fromString= app.mModel.fromString;
+            obj.toString = app.mModel.toString;
+            obj.type = @"Firma";
+            obj.finalString = [obj.fromString stringByAppendingString:[@" till " stringByAppendingString:obj.toString]];
         
-        [app.mModel.mHistoryArray addObject:obj]; 
-        app.mModel.startCoordinate = nil;
-        [[PSLocationManager sharedLocationManager] stopLocationUpdates];
-        [[PSLocationManager sharedLocationManager] resetLocationUpdates];
+            [app.mModel.mHistoryArray addObject:obj]; 
+            app.mModel.startCoordinate = nil;
+            [[PSLocationManager sharedLocationManager] stopLocationUpdates];
+            [[PSLocationManager sharedLocationManager] resetLocationUpdates];
+        
     }
 }
 
@@ -171,6 +175,7 @@ AppAppDelegate *app;
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager distanceUpdated:(CLLocationDistance)distance {
+    [btnBack setEnabled:TRUE];
     self.distanceLabel.text = [NSString stringWithFormat:@"%.2f %@", distance/1000, NSLocalizedString(@"km", @"")];
 }
 
