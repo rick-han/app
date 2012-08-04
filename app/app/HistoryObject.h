@@ -10,10 +10,11 @@
 
 @interface HistoryObject : NSObject
 
-@property (nonatomic, retain) NSString *fromString;
-@property (nonatomic, retain) NSString *toString;
-@property (nonatomic, retain) NSString *distance;
-@property (nonatomic, retain) NSString *type;
+@property (nonatomic, strong) NSString *fromString;
+@property (nonatomic, strong) NSString *toString;
+@property (nonatomic, strong) NSString *distance;
+@property (nonatomic, strong) NSString *type;
+@property (nonatomic, strong) NSString *finalString;
 
 
 @end

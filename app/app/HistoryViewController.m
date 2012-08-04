@@ -19,6 +19,27 @@
 
 AppAppDelegate *app;
 
+/*- (NSString *)documentsDirectory
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    return  documentsDirectory;
+}
+
+- (NSString *)dataFilePath
+{
+    return [[self documentsDirectory] stringByAppendingPathComponent:@"app.plist"];
+}
+
+- (void)saveHistoryItems
+{
+    NSMutableData *data = [[NSMutableData alloc] init];
+    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    [archiver encodeObject: app.mModel.mHistoryArray  forKey:@"Historik"];
+    [archiver finishEncoding];
+    [data writeToFile:[self dataFilePath] atomically:YES];
+}
+*/
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -33,8 +54,9 @@ AppAppDelegate *app;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemHistory tag:0];
-        //self.tabBarItem.title = @"Historik";
+        //göra egen image och använda som tabBarItem
+        UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Historik" image:[UIImage imageNamed:@"test1.png"] tag:0];
+        self.tabBarItem = tabBarItem;
     }
     return self;
 }
@@ -43,9 +65,10 @@ AppAppDelegate *app;
 {
     [super viewDidLoad];
     
+  //  NSLog(@"Documents folder is %@", [self documentsDirectory]);
+  //  NSLog(@"Data file path is %@", [self dataFilePath]); 
     
     self.navigationItem.title = @"Historik";
-   
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -82,14 +105,17 @@ AppAppDelegate *app;
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
 	}
 
     
     HistoryObject *obj = [app.mModel.mHistoryArray objectAtIndex:indexPath.row];    
-    
-    cell.textLabel.text = obj.fromString;
+
+    cell.textLabel.text = obj.finalString;
     cell.detailTextLabel.text = obj.distance;
+    
+    //[self saveHistoryItems];
+    
     return cell;
 }
 

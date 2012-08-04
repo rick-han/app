@@ -111,6 +111,7 @@ AppAppDelegate *app;
     
 }
 
+
 - (void)setSignalStrength:(PSLocationManagerGPSSignalStrength)signalStrength {
     BOOL needToUpdateDelegate = NO;
     if (_signalStrength != signalStrength) {

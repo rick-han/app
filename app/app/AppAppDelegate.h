@@ -25,6 +25,5 @@
 @property (strong, nonatomic) UINavigationController *historyNavController;
 @property (strong, nonatomic) UINavigationController *initsNavController;
 
-
 @end
 

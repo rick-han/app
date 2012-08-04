@@ -14,5 +14,6 @@
 @synthesize toString;
 @synthesize distance;
 @synthesize type;
+@synthesize finalString;
 
 @end

@@ -21,21 +21,24 @@
 @synthesize strengthLabel = _strengthLabel;
 @synthesize distanceLabel = _distanceLabel;
 @synthesize mMapView;
-//@synthesize stopButton;
 
+UIBarButtonItem *btnBack;
 AppAppDelegate *app;
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {        
         self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:0];
-        //self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Karta" image:nil tag:0];
+        
         
         app = (AppAppDelegate*) [[UIApplication sharedApplication] delegate];
         
-        
-        UIBarButtonItem *btnBack = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add)];
+        //Ändra barbutton till en egen knapp.
+        btnBack = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(add)];
         self.navigationItem.RightBarButtonItem = btnBack;
-    }
+       
+           }
     return self;
 }
 
@@ -50,9 +53,24 @@ AppAppDelegate *app;
        
     self.navigationItem.title = @"Karta";
     
-    UIBarButtonItem *stopButton = [[UIBarButtonItem alloc] initWithTitle:@"Stop" style:UIBarButtonItemStylePlain target:nil action:@selector(stopButton:)];          
-    [self.navigationItem setRightBarButtonItem: stopButton animated:YES];
+    /* if (self.distanceLabel.text == @"Laddar distans")
+    {
+        //self.navigationItem.rightBarButtonItem.enabled = NO;
+    } */
     
+    /*
+    do {
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+    } while (self.distanceLabel.text == @"Laddar distans");
+
+     if(self.distanceLabel.text != @"Laddar distans"){
+     self.navigationItem.rightBarButtonItem.enabled = YES;
+     }
+    */
+    //self.distanceLabel.text = @"Laddar distans";
+   
+
+    //self.navigationItem.rightBarButtonItem.enabled = NO;
     [PSLocationManager sharedLocationManager].delegate = self;
     [[PSLocationManager sharedLocationManager] prepLocationUpdates];
     [[PSLocationManager sharedLocationManager] startLocationUpdates];
@@ -62,12 +80,15 @@ AppAppDelegate *app;
 -(void)viewWillAppear:(BOOL)animated{
     [[PSLocationManager sharedLocationManager] prepLocationUpdates];
     [[PSLocationManager sharedLocationManager] startLocationUpdates];
-    self.distanceLabel.text = @"";
+   // self.distanceLabel.text = @"Laddar distans";
+    
+    //self.distanceLabel.text = [NSString stringWithFormat:@"%.2f %@", [CLLocationDistance distance]/1000, NSLocalizedString(@"km", @"")];
+  
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
-    [[PSLocationManager sharedLocationManager] stopLocationUpdates];
-    self.distanceLabel.text = @"";
+    //[[PSLocationManager sharedLocationManager] stopLocationUpdates];
+    //self.distanceLabel.text = @"...";
 
 }
 
@@ -80,18 +101,10 @@ AppAppDelegate *app;
     // Release any retained subviews of the main view.
 }
 
--(IBAction)stopButton:(id)sender
-{
- 
-    
-            
-       
 
-}
 
 -(void) add{
     AppAppDelegate *app = (AppAppDelegate*) [[UIApplication sharedApplication] delegate];
-    HistoryObject *obj = [[HistoryObject alloc] init];
     
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:app.mModel.stopCoordinate completionHandler:^(NSArray *placemarks, NSError *error) {
@@ -103,18 +116,32 @@ AppAppDelegate *app;
         }
     }];
     
-    obj.distance = self.distanceLabel.text;
-    obj.fromString= app.mModel.fromString;
-    obj.toString = app.mModel.toString;
-    
-    [app.mModel.mHistoryArray addObject:obj]; 
-    
-    UIAlertView *alrt = [[UIAlertView alloc] initWithTitle:@"Avbryt?" message:@"Vill du stoppa?" delegate:self cancelButtonTitle:@"Avbryt" otherButtonTitles:@"OK", nil];
-    [alrt show];
-    
-     app.mTabBarController.viewControllers = [NSArray arrayWithObjects:app.initsNavController, app.historyNavController, nil]; 
-    
+
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Vill du stoppa?" delegate:self cancelButtonTitle:@"Avbryt" otherButtonTitles:@"OK", nil];
+    [alert show];
    }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+        app.mTabBarController.viewControllers = [NSArray arrayWithObjects:app.initsNavController, app.historyNavController, nil]; 
+        AppAppDelegate *app = (AppAppDelegate*) [[UIApplication sharedApplication] delegate];
+        HistoryObject *obj = [[HistoryObject alloc] init];
+        
+        obj.distance = self.distanceLabel.text;
+        obj.fromString= app.mModel.fromString;
+        obj.toString = app.mModel.toString;
+        
+        obj.finalString = [obj.fromString stringByAppendingString:[@" till " stringByAppendingString:obj.toString]];
+        
+        [app.mModel.mHistoryArray addObject:obj]; 
+        app.mModel.startCoordinate = nil;
+        [[PSLocationManager sharedLocationManager] stopLocationUpdates];
+        [[PSLocationManager sharedLocationManager] resetLocationUpdates];
+    }
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
@@ -144,7 +171,7 @@ AppAppDelegate *app;
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager distanceUpdated:(CLLocationDistance)distance {
-    self.distanceLabel.text = [NSString stringWithFormat:@"%.2f %@", distance/1000, NSLocalizedString(@"KM", @"")];
+    self.distanceLabel.text = [NSString stringWithFormat:@"%.2f %@", distance/1000, NSLocalizedString(@"km", @"")];
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {
