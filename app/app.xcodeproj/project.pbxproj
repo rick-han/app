@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B1B39B815A1AEC300D96322 /* test1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B1B39B715A1AEC300D96322 /* test1.png */; };
 		A573E8F1158CE3BD0091D4C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A573E8F0158CE3BD0091D4C3 /* UIKit.framework */; };
 		A573E8F3158CE3BD0091D4C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A573E8F2158CE3BD0091D4C3 /* Foundation.framework */; };
 		A573E8F5158CE3BD0091D4C3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A573E8F4158CE3BD0091D4C3 /* CoreGraphics.framework */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B1B39B715A1AEC300D96322 /* test1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test1.png; sourceTree = "<group>"; };
 		A573E8EC158CE3BD0091D4C3 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A573E8F0158CE3BD0091D4C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A573E8F2158CE3BD0091D4C3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -116,6 +118,7 @@
 		A573E8F7158CE3BD0091D4C3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2B1B39B715A1AEC300D96322 /* test1.png */,
 				A573E8F8158CE3BD0091D4C3 /* app-Info.plist */,
 				A573E8F9158CE3BD0091D4C3 /* InfoPlist.strings */,
 				A573E8FC158CE3BD0091D4C3 /* main.m */,
@@ -219,6 +222,7 @@
 				A5E6C00D158DDD9F005617B0 /* MainViewController.xib in Resources */,
 				A5E6C01A158DE9E5005617B0 /* HistoryViewController.xib in Resources */,
 				A5E6C01F158DF5BD005617B0 /* InitViewController.xib in Resources */,
+				2B1B39B815A1AEC300D96322 /* test1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
